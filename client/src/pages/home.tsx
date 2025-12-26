@@ -20,7 +20,9 @@ import {
   ShowerHead,
   Home as HomeIcon,
   Target,
-  Gamepad2
+  Gamepad2,
+  Clock,
+  Menu
 } from "lucide-react";
 
 import exteriorImg from "@assets/c037f4bc-a302-4835-a410-5e0897966e79_1766761095242.JPG";
@@ -51,58 +53,112 @@ export default function Home() {
     }
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { label: "About", id: "about" },
+    { label: "Accommodation", id: "accommodation" },
+    { label: "Gallery", id: "gallery" },
+    { label: "Location", id: "location" },
+    { label: "Contact", id: "contact" },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={exteriorImg}
-            alt="Cottage Olga exterior"
-            className="w-full h-full object-cover object-center"
-            data-testid="img-hero"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60" />
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <button 
+              onClick={() => scrollToSection("hero")}
+              className="text-xl font-bold text-foreground"
+              data-testid="link-navbar-logo"
+            >
+              Cottage Olga
+            </button>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-muted-foreground hover-elevate active-elevate-2 px-3 py-2 rounded-md text-sm font-medium"
+                  data-testid={`link-navbar-${item.id}`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              data-testid="button-mobile-menu"
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden pb-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    scrollToSection(item.id);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-muted-foreground hover-elevate active-elevate-2 rounded-md"
+                  data-testid={`link-mobile-${item.id}`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16">
+        <div className="absolute inset-0 bg-muted/50" />
         
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight"
-            data-testid="text-hero-title"
-          >
-            Cottage Olga
-          </h1>
-          <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-2 font-medium">
-            Your Mountain Retreat in Terchová
-          </p>
-          <p className="text-lg sm:text-xl text-white/80 mb-8">
-            500m from Jánošík Holes • Heart of Malá Fatra
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="backdrop-blur-md bg-white/20 border border-white/30 text-white"
-              onClick={() => scrollToSection("contact")}
-              data-testid="button-check-availability"
-            >
-              Check Availability
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="backdrop-blur-md bg-transparent border border-white/50 text-white"
-              onClick={() => scrollToSection("accommodation")}
-              data-testid="button-view-rooms"
-            >
-              View Rooms
-            </Button>
+        {/* Centered contained image */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-12">
+          <div className="relative rounded-xl overflow-hidden shadow-2xl aspect-[16/9] max-h-[70vh]">
+            <img
+              src={exteriorImg}
+              alt="Cottage Olga exterior"
+              className="w-full h-full object-cover"
+              data-testid="img-hero"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            
+            <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+              <h1 
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight"
+                data-testid="text-hero-title"
+              >
+                Cottage Olga
+              </h1>
+              <p className="text-xl sm:text-2xl text-white/90 mb-2 font-medium">
+                Your Mountain Retreat in Terchová
+              </p>
+              <p className="text-lg text-white/80">
+                500m from Jánošík Holes • Heart of Malá Fatra
+              </p>
+            </div>
           </div>
         </div>
 
         <button 
           onClick={() => scrollToSection("about")}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 animate-bounce"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground animate-bounce"
           aria-label="Scroll down"
           data-testid="button-scroll-down"
         >
@@ -111,7 +167,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4">
+      <section id="about" className="min-h-screen flex items-center py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -173,7 +229,7 @@ export default function Home() {
       </section>
 
       {/* Accommodation Section */}
-      <section id="accommodation" className="py-24 px-4 bg-muted/30">
+      <section id="accommodation" className="min-h-screen flex items-center py-24 px-4 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-accommodation-title">
@@ -280,7 +336,7 @@ export default function Home() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="py-20 px-4">
+      <section id="gallery" className="min-h-screen flex items-center py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-gallery-title">
@@ -333,7 +389,7 @@ export default function Home() {
       </Dialog>
 
       {/* Location & Activities Section */}
-      <section id="location" className="py-24 px-4 bg-muted/30">
+      <section id="location" className="min-h-screen flex items-center py-24 px-4 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -405,7 +461,7 @@ export default function Home() {
       </section>
 
       {/* Outdoor Amenities Section */}
-      <section id="amenities" className="py-20 px-4">
+      <section id="amenities" className="min-h-screen flex items-center py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-amenities-title">
@@ -468,8 +524,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Booking CTA Section */}
-      <section id="contact" className="relative py-24 px-4 overflow-hidden">
+      {/* Contact CTA Section */}
+      <section id="contact" className="min-h-screen flex items-center relative py-24 px-4 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={exteriorImg}
@@ -479,46 +535,59 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/80" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <div className="relative z-10 max-w-4xl mx-auto text-center w-full">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4" data-testid="text-cta-title">
-            Ready for Your Mountain Adventure?
+            Your Mountain Adventure Awaits
           </h2>
-          <p className="text-xl text-white/80 mb-4">
-            Experience the beauty of Malá Fatra and Slovak hospitality
+          <p className="text-xl text-white/90 mb-2">
+            Escape to the heart of Malá Fatra and experience authentic Slovak hospitality
           </p>
           <p className="text-lg text-white/70 mb-8">
-            Total capacity: 20 beds + 4 extra • Year-round availability
+            Total capacity: 28 beds • Year-round availability
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              size="lg"
-              data-testid="button-book-now"
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Book Now
-            </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="backdrop-blur-md bg-transparent border border-white/50 text-white"
-              data-testid="button-contact-us"
-            >
-              <Mail className="w-5 h-5 mr-2" />
-              Contact Us
-            </Button>
+          {/* Check-in/Check-out Info */}
+          <div className="flex flex-wrap justify-center gap-8 mb-12">
+            <div className="flex items-center gap-3 text-white/90">
+              <Clock className="w-5 h-5" />
+              <span>Check-in: 2:00 PM</span>
+            </div>
+            <div className="flex items-center gap-3 text-white/90">
+              <Clock className="w-5 h-5" />
+              <span>Check-out: 10:00 AM</span>
+            </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-md mx-auto">
-            <div className="flex items-center justify-center gap-3 text-white/90">
-              <Phone className="w-5 h-5" />
-              <span data-testid="text-phone">+421 XXX XXX XXX</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 text-white/90">
-              <Mail className="w-5 h-5" />
+          {/* Contact Info */}
+          <div className="space-y-4 mb-8">
+            <a 
+              href="tel:+421915869535" 
+              className="flex items-center justify-center gap-3 text-white text-xl hover-elevate active-elevate-2 px-4 py-2 rounded-lg mx-auto w-fit"
+              data-testid="link-phone"
+            >
+              <Phone className="w-6 h-6" />
+              <span data-testid="text-phone">+421 915 869 535</span>
+            </a>
+            <a 
+              href="mailto:info@chalupaolga.sk" 
+              className="flex items-center justify-center gap-3 text-white text-xl hover-elevate active-elevate-2 px-4 py-2 rounded-lg mx-auto w-fit"
+              data-testid="link-email"
+            >
+              <Mail className="w-6 h-6" />
               <span data-testid="text-email">info@chalupaolga.sk</span>
-            </div>
+            </a>
           </div>
+
+          <Button 
+            size="lg"
+            asChild
+            data-testid="button-contact-us"
+          >
+            <a href="mailto:info@chalupaolga.sk">
+              <Mail className="w-5 h-5 mr-2" />
+              Contact Us
+            </a>
+          </Button>
         </div>
       </section>
 
@@ -576,7 +645,7 @@ export default function Home() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Phone className="w-4 h-4" />
-                  <span>+421 XXX XXX XXX</span>
+                  <span>+421 915 869 535</span>
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Mail className="w-4 h-4" />
