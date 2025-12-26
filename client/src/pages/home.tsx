@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useLanguage } from "@/lib/language-context";
+import type { Language } from "@/lib/translations";
 import { 
   Mountain, 
   Bed, 
@@ -22,7 +24,9 @@ import {
   Target,
   Gamepad2,
   Clock,
-  Menu
+  Menu,
+  Euro,
+  Globe
 } from "lucide-react";
 
 import exteriorImg from "@assets/c037f4bc-a302-4835-a410-5e0897966e79_1766761095242.JPG";
@@ -41,6 +45,9 @@ const galleryImages = [
 export default function Home() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState({ src: "", alt: "" });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   const openLightbox = (image: { src: string; alt: string }) => {
     setLightboxImage(image);
@@ -54,14 +61,18 @@ export default function Home() {
     }
   };
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const languages: { code: Language; label: string; flag: string }[] = [
+    { code: 'sk', label: 'Slovensky', flag: 'SK' },
+    { code: 'en', label: 'English', flag: 'EN' },
+    { code: 'pl', label: 'Polski', flag: 'PL' },
+  ];
 
   const navItems = [
-    { label: "About", id: "about" },
-    { label: "Accommodation", id: "accommodation" },
-    { label: "Gallery", id: "gallery" },
-    { label: "Location", id: "location" },
-    { label: "Contact", id: "contact" },
+    { label: t.nav.about, id: "about" },
+    { label: t.nav.accommodation, id: "accommodation" },
+    { label: t.nav.gallery, id: "gallery" },
+    { label: t.nav.location, id: "location" },
+    { label: t.nav.contact, id: "contact" },
   ];
 
   return (
@@ -92,16 +103,50 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              data-testid="button-mobile-menu"
-            >
-              <Menu className="w-5 h-5" />
-            </Button>
+            <div className="flex items-center gap-2">
+              {/* Language Switcher */}
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  data-testid="button-language-switcher"
+                >
+                  <Globe className="w-5 h-5" />
+                </Button>
+                {langMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-36 bg-card border border-border rounded-md shadow-lg z-50">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code);
+                          setLangMenuOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2 text-sm hover-elevate ${
+                          language === lang.code ? 'bg-muted' : ''
+                        }`}
+                        data-testid={`button-lang-${lang.code}`}
+                      >
+                        <span className="font-medium mr-2">{lang.flag}</span>
+                        {lang.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Menu Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                data-testid="button-mobile-menu"
+              >
+                <Menu className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Navigation */}
@@ -142,13 +187,13 @@ export default function Home() {
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight"
             data-testid="text-hero-title"
           >
-            Cottage Olga
+            {t.hero.title}
           </h1>
           <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-2 font-medium">
-            Your Mountain Retreat in Terchová
+            {t.hero.subtitle}
           </p>
           <p className="text-lg sm:text-xl text-white/80">
-            500m from Jánošík Holes • Heart of Malá Fatra
+            {t.hero.tagline}
           </p>
         </div>
 
@@ -168,25 +213,25 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6" data-testid="text-about-title">
-                Welcome to Your Mountain Escape
+                {t.about.title}
               </h2>
               
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">Located in Biely potok, on the outskirts of Terchová village</span>
+                  <span className="text-lg text-muted-foreground">{t.about.location}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mountain className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">Gateway to Malá Fatra mountains with Jánošík Holes just 500m away</span>
+                  <span className="text-lg text-muted-foreground">{t.about.mountains}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Users className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">Perfect for hikers and families seeking nature walks</span>
+                  <span className="text-lg text-muted-foreground">{t.about.hiking}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <TreePine className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">Year-round accommodation with authentic Slovak hospitality</span>
+                  <span className="text-lg text-muted-foreground">{t.about.hospitality}</span>
                 </li>
               </ul>
               
@@ -196,8 +241,8 @@ export default function Home() {
                     <Bed className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">20+ Beds</p>
-                    <p className="text-sm text-muted-foreground">9 rooms total</p>
+                    <p className="font-semibold text-foreground">{t.about.beds}</p>
+                    <p className="text-sm text-muted-foreground">{t.about.rooms}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -205,8 +250,8 @@ export default function Home() {
                     <Mountain className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">Year-round</p>
-                    <p className="text-sm text-muted-foreground">All seasons</p>
+                    <p className="font-semibold text-foreground">{t.about.yearRound}</p>
+                    <p className="text-sm text-muted-foreground">{t.about.allSeasons}</p>
                   </div>
                 </div>
               </div>
@@ -226,120 +271,161 @@ export default function Home() {
 
       {/* Accommodation Section */}
       <section id="accommodation" className="min-h-screen flex items-center py-24 px-4 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-accommodation-title">
-              Our Accommodation
+              {t.accommodation.title}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Choose between our charming original section or the modern new annex, 
-              each with separate entrances for your privacy.
+              {t.accommodation.subtitle}
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Original Section Card */}
-            <Card className="overflow-visible" data-testid="card-original-section">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <HomeIcon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground">Original Section</h3>
-                    <p className="text-muted-foreground">Classic mountain charm</p>
-                  </div>
-                </div>
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Room Types */}
+            <div>
+              <h3 className="text-2xl font-bold text-foreground mb-6">{t.accommodation.roomTypes}</h3>
+              <div className="space-y-4">
+                <Card className="overflow-visible" data-testid="card-double-room">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Bed className="w-7 h-7 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-foreground">{t.accommodation.doubleRoom}</h4>
+                        <p className="text-muted-foreground">{t.accommodation.doubleRoomDesc}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-                <div className="space-y-4 mb-6">
-                  <div className="flex items-center gap-3 text-foreground">
-                    <Bed className="w-5 h-5 text-muted-foreground" />
-                    <span>3 double + 2 triple bed rooms</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-foreground">
-                    <Users className="w-5 h-5 text-muted-foreground" />
-                    <span>Capacity: up to 12 guests</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-foreground">
-                    <ShowerHead className="w-5 h-5 text-muted-foreground" />
-                    <span>Private toilet & shower in each room</span>
-                  </div>
-                </div>
+                <Card className="overflow-visible" data-testid="card-triple-room">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Users className="w-7 h-7 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-foreground">{t.accommodation.tripleRoom}</h4>
+                        <p className="text-muted-foreground">{t.accommodation.tripleRoomDesc}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-                <div className="pt-6 border-t border-border">
-                  <p className="text-sm font-medium text-foreground mb-3">Shared Facilities:</p>
-                  <div className="flex flex-wrap gap-3">
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-md text-sm text-secondary-foreground">
-                      <Utensils className="w-4 h-4" /> Full Kitchen
-                    </span>
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-md text-sm text-secondary-foreground">
-                      <Flame className="w-4 h-4" /> Fireplace
-                    </span>
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-md text-sm text-secondary-foreground">
-                      <Tv className="w-4 h-4" /> TV
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                <Card className="overflow-visible" data-testid="card-quad-room">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <HomeIcon className="w-7 h-7 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-foreground">{t.accommodation.quadRoom}</h4>
+                        <p className="text-muted-foreground">{t.accommodation.quadRoomDesc}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
 
-            {/* New Annex Card */}
-            <Card className="overflow-visible" data-testid="card-new-annex">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Mountain className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground">New Annex</h3>
-                    <p className="text-muted-foreground">Modern comfort</p>
-                  </div>
+            {/* Facilities & Pricing */}
+            <div className="space-y-8">
+              {/* Facilities */}
+              <div>
+                <h3 className="text-2xl font-bold text-foreground mb-6">{t.accommodation.facilities}</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <Card className="overflow-visible">
+                    <CardContent className="p-5 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Wifi className="w-5 h-5 text-primary" />
+                      </div>
+                      <span className="font-medium text-foreground">{t.accommodation.wifi}</span>
+                    </CardContent>
+                  </Card>
+                  <Card className="overflow-visible">
+                    <CardContent className="p-5 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Tv className="w-5 h-5 text-primary" />
+                      </div>
+                      <span className="font-medium text-foreground">{t.accommodation.tv}</span>
+                    </CardContent>
+                  </Card>
+                  <Card className="overflow-visible">
+                    <CardContent className="p-5 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <TreePine className="w-5 h-5 text-primary" />
+                      </div>
+                      <span className="font-medium text-foreground">{t.accommodation.balcony}</span>
+                    </CardContent>
+                  </Card>
+                  <Card className="overflow-visible">
+                    <CardContent className="p-5 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <ShowerHead className="w-5 h-5 text-primary" />
+                      </div>
+                      <span className="font-medium text-foreground">{t.accommodation.bathroom}</span>
+                    </CardContent>
+                  </Card>
                 </div>
+              </div>
 
-                <div className="space-y-4 mb-6">
-                  <div className="flex items-center gap-3 text-foreground">
-                    <Bed className="w-5 h-5 text-muted-foreground" />
-                    <span>4 four-bed rooms</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-foreground">
-                    <Users className="w-5 h-5 text-muted-foreground" />
-                    <span>Capacity: up to 16 guests</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-foreground">
-                    <ShowerHead className="w-5 h-5 text-muted-foreground" />
-                    <span>Private toilet & shower in each room</span>
-                  </div>
-                </div>
-
-                <div className="pt-6 border-t border-border">
-                  <p className="text-sm font-medium text-foreground mb-3">In Every Room:</p>
-                  <div className="flex flex-wrap gap-3">
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-md text-sm text-secondary-foreground">
-                      <Utensils className="w-4 h-4" /> Kitchenette
-                    </span>
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-md text-sm text-secondary-foreground">
-                      <Tv className="w-4 h-4" /> TV
-                    </span>
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-md text-sm text-secondary-foreground">
-                      <TreePine className="w-4 h-4" /> Balcony
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              {/* Pricing */}
+              <div>
+                <h3 className="text-2xl font-bold text-foreground mb-6">{t.pricing.title}</h3>
+                <Card className="overflow-visible bg-primary/5 border-primary/20">
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Users className="w-5 h-5 text-primary" />
+                          <span className="font-medium text-foreground">{t.pricing.adults}</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-xl font-bold text-primary">
+                          <Euro className="w-5 h-5" />
+                          <span>16</span>
+                          <span className="text-sm font-normal text-muted-foreground ml-1">{t.pricing.perNight}</span>
+                        </div>
+                      </div>
+                      <div className="border-t border-border/50" />
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Users className="w-5 h-5 text-primary" />
+                          <span className="font-medium text-foreground">{t.pricing.children}</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-xl font-bold text-primary">
+                          <Euro className="w-5 h-5" />
+                          <span>11</span>
+                          <span className="text-sm font-normal text-muted-foreground ml-1">{t.pricing.perNight}</span>
+                        </div>
+                      </div>
+                      <div className="border-t border-border/50" />
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Users className="w-5 h-5 text-primary" />
+                          <span className="font-medium text-foreground">{t.pricing.toddlers}</span>
+                        </div>
+                        <span className="text-xl font-bold text-green-600 dark:text-green-500">{t.pricing.free}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Gallery Section */}
       <section id="gallery" className="min-h-screen flex items-center py-20 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-gallery-title">
-              Photo Gallery
+              {t.gallery.title}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Take a look at our cozy mountain retreat
+              {t.gallery.subtitle}
             </p>
           </div>
 
@@ -386,16 +472,14 @@ export default function Home() {
 
       {/* Location & Activities Section */}
       <section id="location" className="min-h-screen flex items-center py-24 px-4 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6" data-testid="text-location-title">
-                Perfect Location for Adventure
+                {t.location.title}
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Nestled in the Biely potok section of Terchová, our cottage is the ideal base 
-                for exploring Malá Fatra National Park. Whether you're a seasoned hiker or 
-                prefer leisurely nature walks, the area offers trails for everyone.
+                {t.location.description}
               </p>
 
               <div className="space-y-6">
@@ -404,9 +488,9 @@ export default function Home() {
                     <MapPin className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">Jánošík Holes</h3>
+                    <h3 className="font-semibold text-foreground text-lg">{t.location.janosikHoles}</h3>
                     <p className="text-muted-foreground">
-                      Just 500m away - stunning rock formations and the gateway to Malá Fatra's most beautiful trails
+                      {t.location.janosikHolesDesc}
                     </p>
                   </div>
                 </div>
@@ -416,9 +500,9 @@ export default function Home() {
                     <Mountain className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">Malá Fatra Trails</h3>
+                    <h3 className="font-semibold text-foreground text-lg">{t.location.hiking}</h3>
                     <p className="text-muted-foreground">
-                      From easy family walks to challenging mountain peaks - routes for all skill levels
+                      {t.location.hikingDesc}
                     </p>
                   </div>
                 </div>
@@ -428,9 +512,9 @@ export default function Home() {
                     <TreePine className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">Year-Round Activities</h3>
+                    <h3 className="font-semibold text-foreground text-lg">{t.location.skiing}</h3>
                     <p className="text-muted-foreground">
-                      Hiking and nature in summer, skiing and winter sports in the snowy months
+                      {t.location.skiingDesc}
                     </p>
                   </div>
                 </div>
@@ -458,13 +542,13 @@ export default function Home() {
 
       {/* Outdoor Amenities Section */}
       <section id="amenities" className="min-h-screen flex items-center py-20 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-amenities-title">
-              Outdoor Amenities
+              {t.amenities.title}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Enjoy quality time outdoors with our garden facilities
+              {t.amenities.subtitle}
             </p>
           </div>
 
@@ -474,9 +558,9 @@ export default function Home() {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Flame className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">Fireplace Area</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.fireplace}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Cozy outdoor seating by the fireplace for evening gatherings
+                  {t.amenities.fireplaceDesc}
                 </p>
               </CardContent>
             </Card>
@@ -486,9 +570,9 @@ export default function Home() {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <TreePine className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">Garden Swing</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.swing}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Relax and enjoy the mountain views from our garden swing
+                  {t.amenities.swingDesc}
                 </p>
               </CardContent>
             </Card>
@@ -498,9 +582,9 @@ export default function Home() {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Gamepad2 className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">Board Games</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.games}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Darts, badminton and more for outdoor entertainment
+                  {t.amenities.gamesDesc}
                 </p>
               </CardContent>
             </Card>
@@ -510,9 +594,9 @@ export default function Home() {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Car className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">Free Parking</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.parking}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Secure on-site parking available for all guests
+                  {t.amenities.parkingDesc}
                 </p>
               </CardContent>
             </Card>
@@ -533,24 +617,24 @@ export default function Home() {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center w-full">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4" data-testid="text-cta-title">
-            Your Mountain Adventure Awaits
+            {t.contact.title}
           </h2>
           <p className="text-xl text-white/90 mb-2">
-            Escape to the heart of Malá Fatra and experience authentic Slovak hospitality
+            {t.contact.subtitle}
           </p>
           <p className="text-lg text-white/70 mb-8">
-            Total capacity: 28 beds • Year-round availability
+            {t.contact.capacity}
           </p>
 
           {/* Check-in/Check-out Info */}
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             <div className="flex items-center gap-3 text-white/90">
               <Clock className="w-5 h-5" />
-              <span>Check-in: 2:00 PM</span>
+              <span>{t.contact.checkIn}</span>
             </div>
             <div className="flex items-center gap-3 text-white/90">
               <Clock className="w-5 h-5" />
-              <span>Check-out: 10:00 AM</span>
+              <span>{t.contact.checkOut}</span>
             </div>
           </div>
 
@@ -581,7 +665,7 @@ export default function Home() {
           >
             <a href="mailto:info@chalupaolga.sk">
               <Mail className="w-5 h-5 mr-2" />
-              Contact Us
+              {t.contact.contactUs}
             </a>
           </Button>
         </div>
@@ -592,9 +676,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-xl font-bold text-foreground mb-4">Cottage Olga</h3>
+              <h3 className="text-xl font-bold text-foreground mb-4">{t.hero.title}</h3>
               <p className="text-muted-foreground mb-4">
-                Year-round mountain accommodation in the heart of Malá Fatra, Slovakia.
+                {t.footer.description}
               </p>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
@@ -603,41 +687,41 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">Quick Links</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t.footer.quickLinks}</h3>
               <nav className="space-y-2">
                 <button 
                   onClick={() => scrollToSection("about")} 
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-about"
                 >
-                  About Us
+                  {t.nav.about}
                 </button>
                 <button 
                   onClick={() => scrollToSection("accommodation")} 
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-accommodation"
                 >
-                  Accommodation
+                  {t.nav.accommodation}
                 </button>
                 <button 
                   onClick={() => scrollToSection("gallery")} 
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-gallery"
                 >
-                  Gallery
+                  {t.nav.gallery}
                 </button>
                 <button 
                   onClick={() => scrollToSection("contact")} 
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-contact"
                 >
-                  Contact
+                  {t.nav.contact}
                 </button>
               </nav>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">Contact</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t.footer.contactTitle}</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Phone className="w-4 h-4" />
@@ -652,7 +736,7 @@ export default function Home() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground text-sm">
-            <p data-testid="text-copyright">© {new Date().getFullYear()} Cottage Olga. All rights reserved.</p>
+            <p data-testid="text-copyright">© {new Date().getFullYear()} {t.hero.title}. {t.footer.copyright}</p>
           </div>
         </div>
       </footer>
