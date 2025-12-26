@@ -498,22 +498,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Navigation Buttons */}
-            <Button
-              size="icon"
-              variant="outline"
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm"
-              onClick={scrollNext}
-              data-testid="button-gallery-next"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
-
-            <p className="text-center text-muted-foreground text-sm mt-4">
-              {language === 'sk' ? 'Použite šípky alebo potiahnite pre ďalšie fotky' : 
-               language === 'pl' ? 'Użyj strzałek lub przesuń, aby zobaczyć więcej' :
-               'Use arrow keys or swipe to see more photos'}
-            </p>
           </div>
         </div>
       </section>
