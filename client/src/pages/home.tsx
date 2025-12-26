@@ -34,6 +34,7 @@ import bedroomImg from "@assets/cba22c65-a8f3-4fe4-b3be-b06e09964e14_17667610952
 import kitchenImg from "@assets/a34df6d6-96ae-4414-9fc5-86ba3850fcfa_1766761095242.JPG";
 import bathroomImg from "@assets/103ba014-624c-43d6-8d04-69f41ee338e2_1766761095241.JPG";
 import rozsutecImg from "@assets/rozsutec_1766763421265.jpg";
+import medziholieImg from "@assets/medziholie_1766764981342.jpg";
 
 const galleryImages = [
   { src: exteriorImg, alt: "Cottage Olga exterior with mountain backdrop and garden" },
@@ -86,7 +87,7 @@ export default function Home() {
               className="text-2xl font-serif font-semibold text-foreground tracking-wide italic"
               data-testid="link-navbar-logo"
             >
-              Cottage Olga
+              {t.hero.title}
             </button>
             
             {/* Desktop Navigation */}
@@ -259,8 +260,8 @@ export default function Home() {
             
             <div className="relative">
               <img
-                src={bedroomImg}
-                alt="Cozy cottage interior"
+                src={medziholieImg}
+                alt="Malá Fatra mountain view"
                 className="w-full h-auto rounded-xl object-cover aspect-[4/3]"
                 data-testid="img-about"
               />
@@ -270,9 +271,9 @@ export default function Home() {
       </section>
 
       {/* Accommodation Section */}
-      <section id="accommodation" className="min-h-screen flex items-center py-24 px-4 bg-muted/30">
+      <section id="accommodation" className="min-h-screen flex items-center py-16 px-4 bg-muted/30">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-accommodation-title">
               {t.accommodation.title}
             </h2>
@@ -281,48 +282,48 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Room Types */}
             <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">{t.accommodation.roomTypes}</h3>
-              <div className="space-y-4">
-                <Card className="overflow-visible" data-testid="card-double-room">
-                  <CardContent className="p-6">
+              <h3 className="text-xl font-bold text-foreground mb-4">{t.accommodation.roomTypes}</h3>
+              <div className="space-y-3">
+                <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-double-room">
+                  <CardContent className="p-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Bed className="w-7 h-7 text-primary" />
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Bed className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-foreground">{t.accommodation.doubleRoom}</h4>
-                        <p className="text-muted-foreground">{t.accommodation.doubleRoomDesc}</p>
+                        <h4 className="text-base font-semibold text-foreground">{t.accommodation.doubleRoom}</h4>
+                        <p className="text-sm text-muted-foreground">{t.accommodation.doubleRoomDesc}</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="overflow-visible" data-testid="card-triple-room">
-                  <CardContent className="p-6">
+                <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-triple-room">
+                  <CardContent className="p-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Users className="w-7 h-7 text-primary" />
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Users className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-foreground">{t.accommodation.tripleRoom}</h4>
-                        <p className="text-muted-foreground">{t.accommodation.tripleRoomDesc}</p>
+                        <h4 className="text-base font-semibold text-foreground">{t.accommodation.tripleRoom}</h4>
+                        <p className="text-sm text-muted-foreground">{t.accommodation.tripleRoomDesc}</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="overflow-visible" data-testid="card-quad-room">
-                  <CardContent className="p-6">
+                <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-quad-room">
+                  <CardContent className="p-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <HomeIcon className="w-7 h-7 text-primary" />
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <HomeIcon className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-foreground">{t.accommodation.quadRoom}</h4>
-                        <p className="text-muted-foreground">{t.accommodation.quadRoomDesc}</p>
+                        <h4 className="text-base font-semibold text-foreground">{t.accommodation.quadRoom}</h4>
+                        <p className="text-sm text-muted-foreground">{t.accommodation.quadRoomDesc}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -331,41 +332,41 @@ export default function Home() {
             </div>
 
             {/* Facilities & Pricing */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               {/* Facilities */}
               <div>
-                <h3 className="text-2xl font-bold text-foreground mb-6">{t.accommodation.facilities}</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="overflow-visible">
-                    <CardContent className="p-5 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Wifi className="w-5 h-5 text-primary" />
+                <h3 className="text-xl font-bold text-foreground mb-4">{t.accommodation.facilities}</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
+                    <CardContent className="p-4 flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Wifi className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-foreground">{t.accommodation.wifi}</span>
+                      <span className="font-medium text-sm text-foreground">{t.accommodation.wifi}</span>
                     </CardContent>
                   </Card>
-                  <Card className="overflow-visible">
-                    <CardContent className="p-5 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Tv className="w-5 h-5 text-primary" />
+                  <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
+                    <CardContent className="p-4 flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Tv className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-foreground">{t.accommodation.tv}</span>
+                      <span className="font-medium text-sm text-foreground">{t.accommodation.tv}</span>
                     </CardContent>
                   </Card>
-                  <Card className="overflow-visible">
-                    <CardContent className="p-5 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <TreePine className="w-5 h-5 text-primary" />
+                  <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
+                    <CardContent className="p-4 flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <TreePine className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-foreground">{t.accommodation.balcony}</span>
+                      <span className="font-medium text-sm text-foreground">{t.accommodation.balcony}</span>
                     </CardContent>
                   </Card>
-                  <Card className="overflow-visible">
-                    <CardContent className="p-5 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <ShowerHead className="w-5 h-5 text-primary" />
+                  <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
+                    <CardContent className="p-4 flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <ShowerHead className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-foreground">{t.accommodation.bathroom}</span>
+                      <span className="font-medium text-sm text-foreground">{t.accommodation.bathroom}</span>
                     </CardContent>
                   </Card>
                 </div>
@@ -373,9 +374,9 @@ export default function Home() {
 
               {/* Pricing */}
               <div>
-                <h3 className="text-2xl font-bold text-foreground mb-6">{t.pricing.title}</h3>
-                <Card className="overflow-visible bg-primary/5 border-primary/20">
-                  <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-foreground mb-4">{t.pricing.title}</h3>
+                <Card className="overflow-visible bg-primary/5 border-primary/20 transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
+                  <CardContent className="p-5">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -553,7 +554,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center overflow-visible" data-testid="card-amenity-fireplace">
+            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-fireplace">
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Flame className="w-8 h-8 text-primary" />
@@ -565,7 +566,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="text-center overflow-visible" data-testid="card-amenity-swing">
+            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-swing">
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <TreePine className="w-8 h-8 text-primary" />
@@ -577,7 +578,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="text-center overflow-visible" data-testid="card-amenity-games">
+            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-games">
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Gamepad2 className="w-8 h-8 text-primary" />
@@ -589,7 +590,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="text-center overflow-visible" data-testid="card-amenity-parking">
+            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-parking">
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Car className="w-8 h-8 text-primary" />

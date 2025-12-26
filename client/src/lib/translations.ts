@@ -12,7 +12,7 @@ export const translations = {
     },
     // Hero
     hero: {
-      title: 'Chata Oľga',
+      title: 'Chalupa Oľga',
       subtitle: 'Vaše horské útočisko v Terchovej',
       tagline: '500m od Jánošíkových dier • Srdce Malej Fatry',
     },
