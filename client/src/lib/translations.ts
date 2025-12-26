@@ -13,16 +13,16 @@ export const translations = {
     // Hero
     hero: {
       title: 'Chalupa Oľga',
-      subtitle: 'Vaše horské útočisko v Terchovej',
-      tagline: '500m od Jánošíkových dier • Srdce Malej Fatry',
+      subtitle: 'Ubytovanie Terchová - Vaše horské útočisko v Malej Fatre',
+      tagline: 'Chata 500m od Jánošíkových dier • Srdce Malej Fatry • Vrátna dolina',
     },
     // About
     about: {
-      title: 'Vitajte vo vašom horskom útočisku',
-      location: 'Nachádza sa v Bielom potoku, na okraji obce Terchová',
-      mountains: 'Brána do Malej Fatry s Jánošíkovými dierami len 500m',
-      hiking: 'Ideálne pre turistov a rodiny hľadajúce prechádzky v prírode',
-      hospitality: 'Celoročné ubytovanie s autentickou slovenskou pohostinnosťou',
+      title: 'Ubytovanie Terchová - Chalupa Oľga v Malej Fatre',
+      location: 'Chalupa v Terchovej, Biely potok - ideálne ubytovanie v Malej Fatre',
+      mountains: 'Chata Terchová len 500m od Jánošíkových dier - vstupná brána do Malej Fatry',
+      hiking: 'Turistika Malá Fatra - ideálne pre rodiny a turistov hľadajúcich prechádzky',
+      hospitality: 'Celoročné ubytovanie Terchová s autentickou slovenskou pohostinnosťou',
       beds: '20 lôžok',
       rooms: '7 izieb',
       yearRound: 'Celoročne',
@@ -30,8 +30,8 @@ export const translations = {
     },
     // Accommodation
     accommodation: {
-      title: 'Naše ubytovanie',
-      subtitle: 'Útulné izby s kompletným vybavením pre váš pohodlný pobyt',
+      title: 'Ubytovanie v Chalupe Oľga Terchová',
+      subtitle: 'Útulné izby s kompletným vybavením pre váš pohodlný pobyt v Malej Fatre',
       roomTypes: 'Typy izieb',
       doubleRoom: 'Dvojlôžková izba',
       doubleRoomDesc: '3 izby s manželskou posteľou',
@@ -61,14 +61,14 @@ export const translations = {
     },
     // Location
     location: {
-      title: 'Lokalita a aktivity',
-      description: 'Ideálna východisková pozícia pre dobrodružstvo v Malej Fatre',
-      janosikHoles: 'Jánošíkove diery',
-      janosikHolesDesc: 'Slávna sústava roklín so skalami a vodopádmi, len 500m od chaty',
-      hiking: 'Turistika',
-      hikingDesc: 'Priamy prístup k turistickým chodníkom vrátane Rozsutca',
-      skiing: 'Lyžovanie',
-      skiingDesc: 'Lyžiarske strediská Vrátna a Snowland na dosah',
+      title: 'Lokalita - Chata Terchová v Malej Fatre',
+      description: 'Chalupa Oľga je ideálna východisková pozícia pre turistiku a lyžovanie v Malej Fatre',
+      janosikHoles: 'Jánošíkove diery - 500m',
+      janosikHolesDesc: 'Slávna sústava roklín so skalami a vodopádmi, len 500m od chalupy Terchová',
+      hiking: 'Turistika Malá Fatra',
+      hikingDesc: 'Priamy prístup k chodníkom vrátane Rozsutca, Veľkého a Malého Kriváňa',
+      skiing: 'Lyžovanie Vrátna',
+      skiingDesc: 'Lyžiarske strediská Vrátna dolina a Snowland na dosah od ubytovanie Terchová',
       traditions: 'Folklór a tradície',
       traditionsDesc: 'Terchová je známa ako rodisko Juraja Jánošíka',
       attractions: 'Okolité atrakcie',
@@ -88,16 +88,16 @@ export const translations = {
     },
     // Contact
     contact: {
-      title: 'Vaše horské dobrodružstvo čaká',
-      subtitle: 'Uniknite do srdca Malej Fatry a zažite autentickú slovenskú pohostinnosť',
-      capacity: 'Celková kapacita: 20 lôžok • Celoročná dostupnosť',
+      title: 'Rezervujte ubytovanie v Chalupe Oľga Terchová',
+      subtitle: 'Chata Terchová v srdci Malej Fatry - autentická slovenská pohostinnosť',
+      capacity: 'Chalupa Terchová: 20 lôžok, 7 izieb • Celoročné ubytovanie Malá Fatra',
       checkIn: 'Check-in: 14:00',
       checkOut: 'Check-out: 10:00',
       contactUs: 'Kontaktujte nás',
     },
     // Footer
     footer: {
-      description: 'Celoročné horské ubytovanie v srdci Malej Fatry, Slovensko.',
+      description: 'Chalupa Oľga - celoročné ubytovanie Terchová v srdci Malej Fatry. Chata pri Jánošíkových dierach.',
       quickLinks: 'Rýchle odkazy',
       contactTitle: 'Kontakt',
       copyright: 'Všetky práva vyhradené.',
@@ -115,16 +115,16 @@ export const translations = {
     // Hero
     hero: {
       title: 'Cottage Olga',
-      subtitle: 'Your Mountain Retreat in Terchová',
-      tagline: '500m from Jánošík Holes • Heart of Malá Fatra',
+      subtitle: 'Accommodation Terchová Slovakia - Mountain Retreat in Malá Fatra',
+      tagline: 'Cottage 500m from Jánošík Holes • Heart of Malá Fatra Mountains • Vrátna Valley',
     },
     // About
     about: {
-      title: 'Welcome to Your Mountain Escape',
-      location: 'Located in Biely potok, on the outskirts of Terchová village',
-      mountains: 'Gateway to Malá Fatra mountains with Jánošík Holes just 500m away',
-      hiking: 'Perfect for hikers and families seeking nature walks',
-      hospitality: 'Year-round accommodation with authentic Slovak hospitality',
+      title: 'Terchová Accommodation - Cottage Olga in Malá Fatra Slovakia',
+      location: 'Mountain cottage in Terchová village, Biely potok - perfect Malá Fatra accommodation',
+      mountains: 'Cottage Terchová just 500m from Jánošík Holes - gateway to Malá Fatra mountains',
+      hiking: 'Malá Fatra hiking - ideal for families and hikers seeking nature trails in Slovakia',
+      hospitality: 'Year-round Terchová accommodation with authentic Slovak mountain hospitality',
       beds: '20 Beds',
       rooms: '7 rooms',
       yearRound: 'Year-round',
@@ -132,8 +132,8 @@ export const translations = {
     },
     // Accommodation
     accommodation: {
-      title: 'Our Accommodation',
-      subtitle: 'Cozy rooms with complete amenities for your comfortable stay',
+      title: 'Accommodation at Cottage Olga Terchová',
+      subtitle: 'Cozy rooms with complete amenities for your comfortable stay in Malá Fatra Slovakia',
       roomTypes: 'Room Types',
       doubleRoom: 'Double Room',
       doubleRoomDesc: '3 rooms with double bed',
