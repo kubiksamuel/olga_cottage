@@ -54,15 +54,15 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={exteriorImg}
             alt="Cottage Olga exterior"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
             data-testid="img-hero"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60" />
         </div>
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -118,16 +118,25 @@ export default function Home() {
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6" data-testid="text-about-title">
                 Welcome to Your Mountain Escape
               </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Cottage Olga is nestled on the outskirts of Terchová village in the scenic Biely potok section. 
-                Our accommodation offers the perfect gateway to the breathtaking Malá Fatra mountains, with the 
-                famous Jánošík Holes just a 500-meter walk away.
-              </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                We provide year-round accommodation suitable for both demanding hikers seeking challenging trails 
-                and families looking for gentle walks through nature. Experience authentic Slovak hospitality 
-                in a setting that connects you with the beauty of the mountains.
-              </p>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Located in Biely potok, on the outskirts of Terchová village</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Mountain className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Gateway to Malá Fatra mountains with Jánošík Holes just 500m away</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Users className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Perfect for hikers and families seeking nature walks</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <TreePine className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Year-round accommodation with authentic Slovak hospitality</span>
+                </li>
+              </ul>
               
               <div className="flex flex-wrap gap-6">
                 <div className="flex items-center gap-3">
@@ -136,7 +145,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">20+ Beds</p>
-                    <p className="text-sm text-muted-foreground">+ 4 extra</p>
+                    <p className="text-sm text-muted-foreground">9 rooms total</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -155,7 +164,7 @@ export default function Home() {
               <img
                 src={bedroomImg}
                 alt="Cozy cottage interior"
-                className="w-full h-auto rounded-xl shadow-lg object-cover aspect-[4/3]"
+                className="w-full h-auto rounded-xl object-cover aspect-[4/3]"
                 data-testid="img-about"
               />
             </div>
@@ -193,11 +202,11 @@ export default function Home() {
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center gap-3 text-foreground">
                     <Bed className="w-5 h-5 text-muted-foreground" />
-                    <span>4 rooms: 2 double + 2 triple</span>
+                    <span>3 double + 2 triple bed rooms</span>
                   </div>
                   <div className="flex items-center gap-3 text-foreground">
                     <Users className="w-5 h-5 text-muted-foreground" />
-                    <span>Capacity: up to 10 guests</span>
+                    <span>Capacity: up to 12 guests</span>
                   </div>
                   <div className="flex items-center gap-3 text-foreground">
                     <ShowerHead className="w-5 h-5 text-muted-foreground" />
@@ -238,11 +247,11 @@ export default function Home() {
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center gap-3 text-foreground">
                     <Bed className="w-5 h-5 text-muted-foreground" />
-                    <span>2 triple rooms + 2 connected quad rooms</span>
+                    <span>4 four-bed rooms</span>
                   </div>
                   <div className="flex items-center gap-3 text-foreground">
                     <Users className="w-5 h-5 text-muted-foreground" />
-                    <span>Capacity: up to 14 guests</span>
+                    <span>Capacity: up to 16 guests</span>
                   </div>
                   <div className="flex items-center gap-3 text-foreground">
                     <ShowerHead className="w-5 h-5 text-muted-foreground" />
@@ -507,7 +516,7 @@ export default function Home() {
             </div>
             <div className="flex items-center justify-center gap-3 text-white/90">
               <Mail className="w-5 h-5" />
-              <span data-testid="text-email">info@chataolga.sk</span>
+              <span data-testid="text-email">info@chalupaolga.sk</span>
             </div>
           </div>
         </div>
@@ -571,7 +580,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Mail className="w-4 h-4" />
-                  <span>info@chataolga.sk</span>
+                  <span>info@chalupaolga.sk</span>
                 </div>
               </div>
             </div>
