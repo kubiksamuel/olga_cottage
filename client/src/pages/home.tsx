@@ -29,6 +29,7 @@ import exteriorImg from "@assets/c037f4bc-a302-4835-a410-5e0897966e79_1766761095
 import bedroomImg from "@assets/cba22c65-a8f3-4fe4-b3be-b06e09964e14_1766761095242.JPG";
 import kitchenImg from "@assets/a34df6d6-96ae-4414-9fc5-86ba3850fcfa_1766761095242.JPG";
 import bathroomImg from "@assets/103ba014-624c-43d6-8d04-69f41ee338e2_1766761095241.JPG";
+import rozsutecImg from "@assets/rozsutec_1766763421265.jpg";
 
 const galleryImages = [
   { src: exteriorImg, alt: "Cottage Olga exterior with mountain backdrop and garden" },
@@ -71,7 +72,7 @@ export default function Home() {
           <div className="flex items-center justify-between h-16">
             <button 
               onClick={() => scrollToSection("hero")}
-              className="text-xl font-bold text-foreground"
+              className="text-2xl font-serif font-semibold text-foreground tracking-wide italic"
               data-testid="link-navbar-logo"
             >
               Cottage Olga
@@ -125,40 +126,35 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16">
-        <div className="absolute inset-0 bg-muted/50" />
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={exteriorImg}
+            alt="Cottage Olga exterior"
+            className="w-full h-full object-cover object-center"
+            data-testid="img-hero"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60" />
+        </div>
         
-        {/* Centered contained image */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 py-12">
-          <div className="relative rounded-xl overflow-hidden shadow-2xl aspect-[16/9] max-h-[70vh]">
-            <img
-              src={exteriorImg}
-              alt="Cottage Olga exterior"
-              className="w-full h-full object-cover"
-              data-testid="img-hero"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-            
-            <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
-              <h1 
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight"
-                data-testid="text-hero-title"
-              >
-                Cottage Olga
-              </h1>
-              <p className="text-xl sm:text-2xl text-white/90 mb-2 font-medium">
-                Your Mountain Retreat in Terchová
-              </p>
-              <p className="text-lg text-white/80">
-                500m from Jánošík Holes • Heart of Malá Fatra
-              </p>
-            </div>
-          </div>
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pt-16">
+          <h1 
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight"
+            data-testid="text-hero-title"
+          >
+            Cottage Olga
+          </h1>
+          <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-2 font-medium">
+            Your Mountain Retreat in Terchová
+          </p>
+          <p className="text-lg sm:text-xl text-white/80">
+            500m from Jánošík Holes • Heart of Malá Fatra
+          </p>
         </div>
 
         <button 
           onClick={() => scrollToSection("about")}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground animate-bounce"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 animate-bounce"
           aria-label="Scroll down"
           data-testid="button-scroll-down"
         >
@@ -528,8 +524,8 @@ export default function Home() {
       <section id="contact" className="min-h-screen flex items-center relative py-24 px-4 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={exteriorImg}
-            alt="Cottage Olga"
+            src={rozsutecImg}
+            alt="Rozsutec mountain in Malá Fatra"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/80" />
