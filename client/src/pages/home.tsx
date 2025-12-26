@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/lib/language-context";
 import type { Language } from "@/lib/translations";
+import useEmblaCarousel from "embla-carousel-react";
 import { 
   Mountain, 
   Bed, 
@@ -16,6 +17,8 @@ import {
   Phone,
   Mail,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   X,
   Tv,
   Utensils,
@@ -34,7 +37,7 @@ import bedroomImg from "@assets/cba22c65-a8f3-4fe4-b3be-b06e09964e14_17667610952
 import kitchenImg from "@assets/a34df6d6-96ae-4414-9fc5-86ba3850fcfa_1766761095242.JPG";
 import bathroomImg from "@assets/103ba014-624c-43d6-8d04-69f41ee338e2_1766761095241.JPG";
 import rozsutecImg from "@assets/rozsutec_1766763421265.jpg";
-import medziholieImg from "@assets/medziholie_1766764981342.jpg";
+import medziholieImg from "@assets/medziholie_1766768127141.jpg";
 
 const galleryImages = [
   { src: exteriorImg, alt: "Cottage Olga exterior with mountain backdrop and garden" },
@@ -45,13 +48,54 @@ const galleryImages = [
 
 export default function Home() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxImage, setLightboxImage] = useState({ src: "", alt: "" });
+  const [lightboxImage, setLightboxImage] = useState(galleryImages[0]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
-  const openLightbox = (image: { src: string; alt: string }) => {
+  // Embla carousel for gallery
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, dragFree: false });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  // Keyboard navigation for carousel
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxOpen) {
+        if (e.key === "ArrowLeft") {
+          const newIndex = (lightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+          setLightboxIndex(newIndex);
+          setLightboxImage(galleryImages[newIndex]);
+        } else if (e.key === "ArrowRight") {
+          const newIndex = (lightboxIndex + 1) % galleryImages.length;
+          setLightboxIndex(newIndex);
+          setLightboxImage(galleryImages[newIndex]);
+        } else if (e.key === "Escape") {
+          setLightboxOpen(false);
+        }
+      } else {
+        if (e.key === "ArrowLeft") {
+          scrollPrev();
+        } else if (e.key === "ArrowRight") {
+          scrollNext();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen, lightboxIndex, scrollPrev, scrollNext]);
+
+  const openLightbox = (image: { src: string; alt: string }, index: number) => {
     setLightboxImage(image);
+    setLightboxIndex(index);
     setLightboxOpen(true);
   };
 
@@ -430,23 +474,55 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {galleryImages.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => openLightbox(image)}
-                className="group relative aspect-square overflow-hidden rounded-lg hover-elevate active-elevate-2"
-                data-testid={`button-gallery-image-${index}`}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-              </button>
-            ))}
+          <div className="relative">
+            {/* Carousel */}
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex">
+                {galleryImages.map((image, index) => (
+                  <div key={index} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_25%] px-2">
+                    <button
+                      onClick={() => openLightbox(image, index)}
+                      className="group relative aspect-square overflow-hidden rounded-lg w-full hover-elevate active-elevate-2"
+                      data-testid={`button-gallery-image-${index}`}
+                    >
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <Button
+              size="icon"
+              variant="outline"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm"
+              onClick={scrollPrev}
+              data-testid="button-gallery-prev"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+            <Button
+              size="icon"
+              variant="outline"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm"
+              onClick={scrollNext}
+              data-testid="button-gallery-next"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+
+            <p className="text-center text-muted-foreground text-sm mt-4">
+              {language === 'sk' ? 'Použite šípky alebo potiahnite pre ďalšie fotky' : 
+               language === 'pl' ? 'Użyj strzałek lub przesuń, aby zobaczyć więcej' :
+               'Use arrow keys or swipe to see more photos'}
+            </p>
           </div>
         </div>
       </section>
@@ -462,12 +538,44 @@ export default function Home() {
           >
             <X className="w-6 h-6" />
           </button>
+          
+          {/* Lightbox Navigation */}
+          <button
+            onClick={() => {
+              const newIndex = (lightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+              setLightboxIndex(newIndex);
+              setLightboxImage(galleryImages[newIndex]);
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/50 text-white"
+            aria-label="Previous image"
+            data-testid="button-lightbox-prev"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={() => {
+              const newIndex = (lightboxIndex + 1) % galleryImages.length;
+              setLightboxIndex(newIndex);
+              setLightboxImage(galleryImages[newIndex]);
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/50 text-white"
+            aria-label="Next image"
+            data-testid="button-lightbox-next"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
           <img
             src={lightboxImage.src}
             alt={lightboxImage.alt}
             className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
             data-testid="img-lightbox"
           />
+          
+          {/* Image counter */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+            {lightboxIndex + 1} / {galleryImages.length}
+          </div>
         </DialogContent>
       </Dialog>
 
