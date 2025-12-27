@@ -5,13 +5,13 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/lib/language-context";
 import type { Language } from "@/lib/translations";
 import useEmblaCarousel from "embla-carousel-react";
-import { 
-  Mountain, 
-  Bed, 
-  Users, 
+import {
+  Mountain,
+  Bed,
+  Users,
   Wifi,
-  Car, 
-  Flame, 
+  Car,
+  Flame,
   TreePine,
   MapPin,
   Phone,
@@ -29,7 +29,7 @@ import {
   Clock,
   Menu,
   Euro,
-  Globe
+  Globe,
 } from "lucide-react";
 
 import exteriorImg from "@assets/c037f4bc-a302-4835-a410-5e0897966e79_1766761095242.JPG";
@@ -40,7 +40,10 @@ import rozsutecImg from "@assets/rozsutec_1766763421265.jpg";
 import medziholieImg from "@assets/medziholie_1766768127141.jpg";
 
 const galleryImages = [
-  { src: exteriorImg, alt: "Cottage Olga exterior with mountain backdrop and garden" },
+  {
+    src: exteriorImg,
+    alt: "Cottage Olga exterior with mountain backdrop and garden",
+  },
   { src: bedroomImg, alt: "Cozy bedroom with wooden furniture" },
   { src: kitchenImg, alt: "Fully equipped kitchenette" },
   { src: bathroomImg, alt: "Modern bathroom with shower" },
@@ -55,7 +58,10 @@ export default function Home() {
   const { language, setLanguage, t } = useLanguage();
 
   // Embla carousel for gallery
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, dragFree: false });
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    dragFree: false,
+  });
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -70,7 +76,8 @@ export default function Home() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxOpen) {
         if (e.key === "ArrowLeft") {
-          const newIndex = (lightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+          const newIndex =
+            (lightboxIndex - 1 + galleryImages.length) % galleryImages.length;
           setLightboxIndex(newIndex);
           setLightboxImage(galleryImages[newIndex]);
         } else if (e.key === "ArrowRight") {
@@ -107,9 +114,9 @@ export default function Home() {
   };
 
   const languages: { code: Language; label: string; flag: string }[] = [
-    { code: 'sk', label: 'Slovensky', flag: 'SK' },
-    { code: 'en', label: 'English', flag: 'EN' },
-    { code: 'pl', label: 'Polski', flag: 'PL' },
+    { code: "sk", label: "Slovensky", flag: "SK" },
+    { code: "en", label: "English", flag: "EN" },
+    { code: "pl", label: "Polski", flag: "PL" },
   ];
 
   const navItems = [
@@ -126,14 +133,14 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <button 
+            <button
               onClick={() => scrollToSection("hero")}
               className="text-2xl font-serif font-semibold text-foreground tracking-wide italic"
               data-testid="link-navbar-logo"
             >
               {t.hero.title}
             </button>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
@@ -169,7 +176,7 @@ export default function Home() {
                           setLangMenuOpen(false);
                         }}
                         className={`w-full text-left px-4 py-2 text-sm hover-elevate ${
-                          language === lang.code ? 'bg-muted' : ''
+                          language === lang.code ? "bg-muted" : ""
                         }`}
                         data-testid={`button-lang-${lang.code}`}
                       >
@@ -216,7 +223,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section
+        id="hero"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
         <div className="absolute inset-0">
           <img
             src={exteriorImg}
@@ -226,9 +236,9 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60" />
         </div>
-        
+
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pt-16">
-          <h1 
+          <h1
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight"
             data-testid="text-hero-title"
           >
@@ -237,12 +247,10 @@ export default function Home() {
           <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-2 font-medium">
             {t.hero.subtitle}
           </p>
-          <p className="text-lg sm:text-xl text-white/80">
-            {t.hero.tagline}
-          </p>
+          <p className="text-lg sm:text-xl text-white/80">{t.hero.tagline}</p>
         </div>
 
-        <button 
+        <button
           onClick={() => scrollToSection("about")}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 animate-bounce"
           aria-label="Scroll down"
@@ -257,37 +265,52 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6" data-testid="text-about-title">
+              <h2
+                className="text-3xl lg:text-4xl font-bold text-foreground mb-6"
+                data-testid="text-about-title"
+              >
                 {t.about.title}
               </h2>
-              
+
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">{t.about.location}</span>
+                  <span className="text-lg text-muted-foreground">
+                    {t.about.location}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Mountain className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">{t.about.mountains}</span>
+                  <span className="text-lg text-muted-foreground">
+                    {t.about.mountains}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Users className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">{t.about.hiking}</span>
+                  <span className="text-lg text-muted-foreground">
+                    {t.about.hiking}
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <TreePine className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                  <span className="text-lg text-muted-foreground">{t.about.hospitality}</span>
+                  <span className="text-lg text-muted-foreground">
+                    {t.about.hospitality}
+                  </span>
                 </li>
               </ul>
-              
+
               <div className="flex flex-wrap gap-6">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                     <Bed className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">{t.about.beds}</p>
-                    <p className="text-sm text-muted-foreground">{t.about.rooms}</p>
+                    <p className="font-semibold text-foreground">
+                      {t.about.beds}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {t.about.rooms}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -295,13 +318,17 @@ export default function Home() {
                     <Mountain className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">{t.about.yearRound}</p>
-                    <p className="text-sm text-muted-foreground">{t.about.allSeasons}</p>
+                    <p className="font-semibold text-foreground">
+                      {t.about.yearRound}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {t.about.allSeasons}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <div className="relative">
               <img
                 src={medziholieImg}
@@ -315,10 +342,16 @@ export default function Home() {
       </section>
 
       {/* Accommodation Section */}
-      <section id="accommodation" className="min-h-screen flex items-center py-16 px-4 bg-muted/30">
+      <section
+        id="accommodation"
+        className="min-h-screen flex items-center py-16 px-4 bg-muted/30"
+      >
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-10">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-accommodation-title">
+            <h2
+              className="text-3xl lg:text-4xl font-bold text-foreground mb-4"
+              data-testid="text-accommodation-title"
+            >
               {t.accommodation.title}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -329,45 +362,68 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Room Types */}
             <div>
-              <h3 className="text-xl font-bold text-foreground mb-4">{t.accommodation.roomTypes}</h3>
+              <h3 className="text-xl font-bold text-foreground mb-4">
+                {t.accommodation.roomTypes}
+              </h3>
               <div className="space-y-3">
-                <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-double-room">
+                <Card
+                  className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+                  data-testid="card-double-room"
+                >
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <Bed className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-base font-semibold text-foreground">{t.accommodation.doubleRoom}</h4>
-                        <p className="text-sm text-muted-foreground">{t.accommodation.doubleRoomDesc}</p>
+                        <h4 className="text-base font-semibold text-foreground">
+                          {t.accommodation.doubleRoom}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {t.accommodation.doubleRoomDesc}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-triple-room">
+                <Card
+                  className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+                  data-testid="card-triple-room"
+                >
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <Users className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-base font-semibold text-foreground">{t.accommodation.tripleRoom}</h4>
-                        <p className="text-sm text-muted-foreground">{t.accommodation.tripleRoomDesc}</p>
+                        <h4 className="text-base font-semibold text-foreground">
+                          {t.accommodation.tripleRoom}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {t.accommodation.tripleRoomDesc}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-quad-room">
+                <Card
+                  className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+                  data-testid="card-quad-room"
+                >
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <HomeIcon className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="text-base font-semibold text-foreground">{t.accommodation.quadRoom}</h4>
-                        <p className="text-sm text-muted-foreground">{t.accommodation.quadRoomDesc}</p>
+                        <h4 className="text-base font-semibold text-foreground">
+                          {t.accommodation.quadRoom}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {t.accommodation.quadRoomDesc}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -379,14 +435,18 @@ export default function Home() {
             <div className="space-y-6">
               {/* Facilities */}
               <div>
-                <h3 className="text-xl font-bold text-foreground mb-4">{t.accommodation.facilities}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-4">
+                  {t.accommodation.facilities}
+                </h3>
                 <div className="grid grid-cols-2 gap-3">
                   <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
                     <CardContent className="p-4 flex items-center gap-3">
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <Wifi className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-sm text-foreground">{t.accommodation.wifi}</span>
+                      <span className="font-medium text-sm text-foreground">
+                        {t.accommodation.wifi}
+                      </span>
                     </CardContent>
                   </Card>
                   <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
@@ -394,7 +454,9 @@ export default function Home() {
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <Tv className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-sm text-foreground">{t.accommodation.tv}</span>
+                      <span className="font-medium text-sm text-foreground">
+                        {t.accommodation.tv}
+                      </span>
                     </CardContent>
                   </Card>
                   <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
@@ -402,7 +464,9 @@ export default function Home() {
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <TreePine className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-sm text-foreground">{t.accommodation.balcony}</span>
+                      <span className="font-medium text-sm text-foreground">
+                        {t.accommodation.balcony}
+                      </span>
                     </CardContent>
                   </Card>
                   <Card className="overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
@@ -410,7 +474,9 @@ export default function Home() {
                       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <ShowerHead className="w-4 h-4 text-primary" />
                       </div>
-                      <span className="font-medium text-sm text-foreground">{t.accommodation.bathroom}</span>
+                      <span className="font-medium text-sm text-foreground">
+                        {t.accommodation.bathroom}
+                      </span>
                     </CardContent>
                   </Card>
                 </div>
@@ -418,40 +484,54 @@ export default function Home() {
 
               {/* Pricing */}
               <div>
-                <h3 className="text-xl font-bold text-foreground mb-4">{t.pricing.title}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-4">
+                  {t.pricing.title}
+                </h3>
                 <Card className="overflow-visible bg-primary/5 border-primary/20 transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg">
                   <CardContent className="p-5">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Users className="w-5 h-5 text-primary" />
-                          <span className="font-medium text-foreground">{t.pricing.adults}</span>
+                          <span className="font-medium text-foreground">
+                            {t.pricing.adults}
+                          </span>
                         </div>
                         <div className="flex items-center gap-1 text-xl font-bold text-primary">
                           <Euro className="w-5 h-5" />
                           <span>16</span>
-                          <span className="text-sm font-normal text-muted-foreground ml-1">{t.pricing.perNight}</span>
+                          <span className="text-sm font-normal text-muted-foreground ml-1">
+                            {t.pricing.perNight}
+                          </span>
                         </div>
                       </div>
                       <div className="border-t border-border/50" />
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Users className="w-5 h-5 text-primary" />
-                          <span className="font-medium text-foreground">{t.pricing.children}</span>
+                          <span className="font-medium text-foreground">
+                            {t.pricing.children}
+                          </span>
                         </div>
                         <div className="flex items-center gap-1 text-xl font-bold text-primary">
                           <Euro className="w-5 h-5" />
                           <span>11</span>
-                          <span className="text-sm font-normal text-muted-foreground ml-1">{t.pricing.perNight}</span>
+                          <span className="text-sm font-normal text-muted-foreground ml-1">
+                            {t.pricing.perNight}
+                          </span>
                         </div>
                       </div>
                       <div className="border-t border-border/50" />
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Users className="w-5 h-5 text-primary" />
-                          <span className="font-medium text-foreground">{t.pricing.toddlers}</span>
+                          <span className="font-medium text-foreground">
+                            {t.pricing.toddlers}
+                          </span>
                         </div>
-                        <span className="text-xl font-bold text-green-600 dark:text-green-500">{t.pricing.free}</span>
+                        <span className="text-xl font-bold text-green-600 dark:text-green-500">
+                          {t.pricing.free}
+                        </span>
                       </div>
                     </div>
                   </CardContent>
@@ -463,10 +543,16 @@ export default function Home() {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="min-h-screen flex items-center py-20 px-4">
+      <section
+        id="gallery"
+        className="min-h-screen flex items-center py-20 px-4"
+      >
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-gallery-title">
+            <h2
+              className="text-3xl lg:text-4xl font-bold text-foreground mb-4"
+              data-testid="text-gallery-title"
+            >
               {t.gallery.title}
             </h2>
             <p className="text-lg text-muted-foreground">
@@ -479,7 +565,10 @@ export default function Home() {
             <div className="overflow-hidden" ref={emblaRef}>
               <div className="flex">
                 {galleryImages.map((image, index) => (
-                  <div key={index} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_25%] px-2">
+                  <div
+                    key={index}
+                    className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_25%] px-2"
+                  >
                     <button
                       onClick={() => openLightbox(image, index)}
                       className="group relative aspect-square overflow-hidden rounded-lg w-full hover-elevate active-elevate-2"
@@ -497,7 +586,6 @@ export default function Home() {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -513,11 +601,13 @@ export default function Home() {
           >
             <X className="w-6 h-6" />
           </button>
-          
+
           {/* Lightbox Navigation */}
           <button
             onClick={() => {
-              const newIndex = (lightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+              const newIndex =
+                (lightboxIndex - 1 + galleryImages.length) %
+                galleryImages.length;
               setLightboxIndex(newIndex);
               setLightboxImage(galleryImages[newIndex]);
             }}
@@ -546,7 +636,7 @@ export default function Home() {
             className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
             data-testid="img-lightbox"
           />
-          
+
           {/* Image counter */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
             {lightboxIndex + 1} / {galleryImages.length}
@@ -555,11 +645,17 @@ export default function Home() {
       </Dialog>
 
       {/* Location & Activities Section */}
-      <section id="location" className="min-h-screen flex items-center py-24 px-4 bg-muted/30">
+      <section
+        id="location"
+        className="min-h-screen flex items-center py-24 px-4 bg-muted/30"
+      >
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6" data-testid="text-location-title">
+              <h2
+                className="text-3xl lg:text-4xl font-bold text-foreground mb-6"
+                data-testid="text-location-title"
+              >
                 {t.location.title}
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
@@ -572,7 +668,9 @@ export default function Home() {
                     <MapPin className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">{t.location.janosikHoles}</h3>
+                    <h3 className="font-semibold text-foreground text-lg">
+                      {t.location.janosikHoles}
+                    </h3>
                     <p className="text-muted-foreground">
                       {t.location.janosikHolesDesc}
                     </p>
@@ -584,7 +682,9 @@ export default function Home() {
                     <Mountain className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">{t.location.hiking}</h3>
+                    <h3 className="font-semibold text-foreground text-lg">
+                      {t.location.hiking}
+                    </h3>
                     <p className="text-muted-foreground">
                       {t.location.hikingDesc}
                     </p>
@@ -596,7 +696,9 @@ export default function Home() {
                     <TreePine className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">{t.location.skiing}</h3>
+                    <h3 className="font-semibold text-foreground text-lg">
+                      {t.location.skiing}
+                    </h3>
                     <p className="text-muted-foreground">
                       {t.location.skiingDesc}
                     </p>
@@ -605,19 +707,26 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative">
+            <div>
               <div className="aspect-video rounded-xl overflow-hidden bg-muted">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10477.95987657!2d19.0292!3d49.2587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4715a3d6c6f5a5e5%3A0x8a7b58e4e4e4e4e4!2sTerchov%C3%A1%2C%20Slovakia!5e0!3m2!1sen!2sus!4v1609459200000!5m2!1sen!2sus"
+                  src="https://maps.google.com/maps?q=49.26002,19.07234+(Chalupa+Oľga)&z=15&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Cottage Olga location map"
+                  title="Chalupa Oľga - Biely Potok 677, Šparengovci, Terchová"
                   data-testid="iframe-map"
                 />
+              </div>
+              {/* Address below map */}
+              <div className="mt-3 text-center lg:text-left">
+                <p className=" text-muted-foreground flex items-center justify-center lg:justify-start gap-2">
+                  <MapPin className="w-4 h-4" />
+                  <span>{t.footer.address}</span>
+                </p>
               </div>
             </div>
           </div>
@@ -625,10 +734,16 @@ export default function Home() {
       </section>
 
       {/* Outdoor Amenities Section */}
-      <section id="amenities" className="min-h-screen flex items-center py-20 px-4">
+      <section
+        id="amenities"
+        className="min-h-screen flex items-center py-20 px-4"
+      >
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4" data-testid="text-amenities-title">
+            <h2
+              className="text-3xl lg:text-4xl font-bold text-foreground mb-4"
+              data-testid="text-amenities-title"
+            >
               {t.amenities.title}
             </h2>
             <p className="text-lg text-muted-foreground">
@@ -637,48 +752,68 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-fireplace">
+            <Card
+              className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+              data-testid="card-amenity-fireplace"
+            >
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Flame className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.fireplace}</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">
+                  {t.amenities.fireplace}
+                </h3>
                 <p className="text-muted-foreground text-sm">
                   {t.amenities.fireplaceDesc}
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-swing">
+            <Card
+              className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+              data-testid="card-amenity-swing"
+            >
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <TreePine className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.swing}</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">
+                  {t.amenities.swing}
+                </h3>
                 <p className="text-muted-foreground text-sm">
                   {t.amenities.swingDesc}
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-games">
+            <Card
+              className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+              data-testid="card-amenity-games"
+            >
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Gamepad2 className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.games}</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">
+                  {t.amenities.games}
+                </h3>
                 <p className="text-muted-foreground text-sm">
                   {t.amenities.gamesDesc}
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg" data-testid="card-amenity-parking">
+            <Card
+              className="text-center overflow-visible transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg"
+              data-testid="card-amenity-parking"
+            >
               <CardContent className="p-6">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <Car className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground text-lg mb-2">{t.amenities.parking}</h3>
+                <h3 className="font-semibold text-foreground text-lg mb-2">
+                  {t.amenities.parking}
+                </h3>
                 <p className="text-muted-foreground text-sm">
                   {t.amenities.parkingDesc}
                 </p>
@@ -689,7 +824,10 @@ export default function Home() {
       </section>
 
       {/* Contact CTA Section */}
-      <section id="contact" className="min-h-screen flex items-center relative py-24 px-4 overflow-hidden">
+      <section
+        id="contact"
+        className="min-h-screen flex items-center relative py-24 px-4 overflow-hidden"
+      >
         <div className="absolute inset-0">
           <img
             src={rozsutecImg}
@@ -700,15 +838,14 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center w-full">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4" data-testid="text-cta-title">
+          <h2
+            className="text-3xl lg:text-4xl font-bold text-white mb-4"
+            data-testid="text-cta-title"
+          >
             {t.contact.title}
           </h2>
-          <p className="text-xl text-white/90 mb-2">
-            {t.contact.subtitle}
-          </p>
-          <p className="text-lg text-white/70 mb-8">
-            {t.contact.capacity}
-          </p>
+          <p className="text-xl text-white/90 mb-2">{t.contact.subtitle}</p>
+          <p className="text-lg text-white/70 mb-8">{t.contact.capacity}</p>
 
           {/* Check-in/Check-out Info */}
           <div className="flex flex-wrap justify-center gap-8 mb-12">
@@ -724,16 +861,16 @@ export default function Home() {
 
           {/* Contact Info */}
           <div className="space-y-4 mb-8">
-            <a 
-              href="tel:+421915869535" 
+            <a
+              href="tel:+421915869535"
               className="flex items-center justify-center gap-3 text-white text-xl hover-elevate active-elevate-2 px-4 py-2 rounded-lg mx-auto w-fit"
               data-testid="link-phone"
             >
               <Phone className="w-6 h-6" />
               <span data-testid="text-phone">+421 915 869 535</span>
             </a>
-            <a 
-              href="mailto:info@chalupaolga.sk" 
+            <a
+              href="mailto:info@chalupaolga.sk"
               className="flex items-center justify-center gap-3 text-white text-xl hover-elevate active-elevate-2 px-4 py-2 rounded-lg mx-auto w-fit"
               data-testid="link-email"
             >
@@ -742,11 +879,7 @@ export default function Home() {
             </a>
           </div>
 
-          <Button 
-            size="lg"
-            asChild
-            data-testid="button-contact-us"
-          >
+          <Button size="lg" asChild data-testid="button-contact-us">
             <a href="mailto:info@chalupaolga.sk">
               <Mail className="w-5 h-5 mr-2" />
               {t.contact.contactUs}
@@ -760,42 +893,46 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-xl font-bold text-foreground mb-4">{t.hero.title}</h3>
+              <h3 className="text-xl font-bold text-foreground mb-4">
+                {t.hero.title}
+              </h3>
               <p className="text-muted-foreground mb-4">
                 {t.footer.description}
               </p>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>Terchová, Biely potok, Slovakia</span>
+                <span>{t.footer.address}</span>
               </div>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">{t.footer.quickLinks}</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">
+                {t.footer.quickLinks}
+              </h3>
               <nav className="space-y-2">
-                <button 
-                  onClick={() => scrollToSection("about")} 
+                <button
+                  onClick={() => scrollToSection("about")}
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-about"
                 >
                   {t.nav.about}
                 </button>
-                <button 
-                  onClick={() => scrollToSection("accommodation")} 
+                <button
+                  onClick={() => scrollToSection("accommodation")}
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-accommodation"
                 >
                   {t.nav.accommodation}
                 </button>
-                <button 
-                  onClick={() => scrollToSection("gallery")} 
+                <button
+                  onClick={() => scrollToSection("gallery")}
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-gallery"
                 >
                   {t.nav.gallery}
                 </button>
-                <button 
-                  onClick={() => scrollToSection("contact")} 
+                <button
+                  onClick={() => scrollToSection("contact")}
                   className="block text-muted-foreground hover-elevate active-elevate-2 px-2 py-1 -mx-2 rounded"
                   data-testid="link-footer-contact"
                 >
@@ -805,7 +942,9 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4">{t.footer.contactTitle}</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">
+                {t.footer.contactTitle}
+              </h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <Phone className="w-4 h-4" />
@@ -820,7 +959,9 @@ export default function Home() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground text-sm">
-            <p data-testid="text-copyright">© {new Date().getFullYear()} {t.hero.title}. {t.footer.copyright}</p>
+            <p data-testid="text-copyright">
+              © {new Date().getFullYear()} {t.hero.title}. {t.footer.copyright}
+            </p>
           </div>
         </div>
       </footer>
