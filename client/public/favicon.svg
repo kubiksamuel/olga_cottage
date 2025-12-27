@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="64" fill="#2D5016"/>
+  
+  <!-- Mountain background -->
+  <path d="M10 75 L35 45 L55 58 L75 35 L95 50 L118 65 L118 118 L10 118 Z" fill="#4A7C2C" opacity="0.6"/>
+  
+  <!-- Cottage roof -->
+  <path d="M35 68 L64 45 L93 68 L90 68 L64 50 L38 68 Z" fill="#8B4513"/>
+  <path d="M64 45 L93 68 L93 72 L64 49 Z" fill="#6B3410" opacity="0.5"/>
+  
+  <!-- Cottage body -->
+  <rect x="38" y="68" width="52" height="38" fill="#D2691E"/>
+  <rect x="40" y="70" width="48" height="36" fill="#CD853F"/>
+  
+  <!-- Door -->
+  <rect x="54" y="82" width="20" height="24" fill="#654321" rx="2"/>
+  <circle cx="68" cy="94" r="1.5" fill="#FFD700"/>
+  
+  <!-- Window left -->
+  <rect x="42" y="75" width="10" height="10" fill="#87CEEB" rx="1"/>
+  <line x1="47" y1="75" x2="47" y2="85" stroke="#4A7C8C" stroke-width="0.5"/>
+  <line x1="42" y1="80" x2="52" y2="80" stroke="#4A7C8C" stroke-width="0.5"/>
+  
+  <!-- Window right -->
+  <rect x="76" y="75" width="10" height="10" fill="#87CEEB" rx="1"/>
+  <line x1="81" y1="75" x2="81" y2="85" stroke="#4A7C8C" stroke-width="0.5"/>
+  <line x1="76" y1="80" x2="86" y2="80" stroke="#4A7C8C" stroke-width="0.5"/>
+  
+  <!-- Chimney -->
+  <rect x="72" y="52" width="8" height="18" fill="#8B4513"/>
+  <rect x="71" y="52" width="10" height="3" fill="#654321"/>
+  
+  <!-- Smoke -->
+  <circle cx="76" cy="48" r="2.5" fill="#E0E0E0" opacity="0.7"/>
+  <circle cx="78" cy="44" r="3" fill="#E0E0E0" opacity="0.6"/>
+  <circle cx="74" cy="41" r="2.5" fill="#E0E0E0" opacity="0.5"/>
+  
+  <!-- Pine trees -->
+  <path d="M20 95 L25 80 L30 95 Z" fill="#2D5016"/>
+  <path d="M20 90 L25 75 L30 90 Z" fill="#2D5016"/>
+  <rect x="24" y="95" width="2" height="8" fill="#654321"/>
+  
+  <path d="M100 100 L105 85 L110 100 Z" fill="#2D5016"/>
+  <path d="M100 95 L105 80 L110 95 Z" fill="#2D5016"/>
+  <rect x="104" y="100" width="2" height="8" fill="#654321"/>
+</svg>
